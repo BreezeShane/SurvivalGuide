@@ -1,0 +1,29 @@
+name: Hinter
+on: 
+  # push:
+  #   branch: 
+  #     - golang
+  schedule:
+    - cron: '00 13 * * *' # 21:00
+jobs:
+  Hinter:
+    env:
+      MAIL_NAME: ${{ secrets.MAIL_NAME }}
+      MAIL_PASSWD: ${{ secrets.MAIL_PASSWD }}
+      REQUEST_TOKEN: ${{ secrets.REQUEST_TOKEN }}
+    name: Hinter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go 1.17
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.17
+        id: go
+
+      - name: Check out source code
+        uses: actions/checkout@v1
+
+      - name: Hinting
+        run: |
+          cd go
+          go run main.go --emailName="$MAIL_NAME" --emailPasswd="$MAIL_PASSWD" --githubToken="$REQUEST_TOKEN"
