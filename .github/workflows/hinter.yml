@@ -3,8 +3,8 @@ on:
   # push:
   #   branch: 
   #     - golang
-  schedule:
-    - cron: '00 13 * * *' # 21:00
+  # schedule:
+    # - cron: '00 13 * * *' # 21:00
 jobs:
   Hinter:
     env:
